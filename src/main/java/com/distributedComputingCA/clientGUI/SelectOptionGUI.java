@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.distributedComputingCA.client.Client;
-import com.distributedComputingCA.protocol.Protocol;
+import com.distributedComputingCA.protocol.*;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -73,7 +73,7 @@ public class SelectOptionGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String serverResponse = Client.downloadMessagesRequest(Protocol.DOWNLOAD, SelectOptionGUI.super.getTitle());
+                String serverResponse = Client.downloadMessagesRequest(ClientProtocol.DOWNLOAD, SelectOptionGUI.super.getTitle());
                 downloadGUI(serverResponse);
             }
         });
@@ -86,7 +86,7 @@ public class SelectOptionGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String serverResponse = Client.logOffRequest(Protocol.LOGOFF, SelectOptionGUI.super.getTitle());
+                String serverResponse = Client.logOffRequest(ClientProtocol.LOGOFF, SelectOptionGUI.super.getTitle());
                 logOffGUI(serverResponse);
                 SelectOptionGUI.super.setVisible(false);
                 SelectOptionGUI.super.dispose();
@@ -100,7 +100,7 @@ public class SelectOptionGUI extends JFrame {
 	}
 
 	private void downloadGUI(String response) {
-        if(response.equals("702: " + Protocol.DOWNLOAD_SUCCESS)) {
+        if(response.equals("702: " + ServerProtocol.DOWNLOAD_SUCCESS)) {
             JOptionPane.showMessageDialog(null, "Download Successful",
                     response, JOptionPane.INFORMATION_MESSAGE);
         }else {
@@ -110,7 +110,7 @@ public class SelectOptionGUI extends JFrame {
     }
 
     private void logOffGUI(String response) {
-        if(response.equals("902: " + Protocol.LOGOFF_SUCCESS)) {
+        if(response.equals("902: " + ServerProtocol.LOGOFF_SUCCESS)) {
             JOptionPane.showMessageDialog(null, SelectOptionGUI.super.getTitle() +
                     " has been logged off", response, JOptionPane.INFORMATION_MESSAGE);
         }else {

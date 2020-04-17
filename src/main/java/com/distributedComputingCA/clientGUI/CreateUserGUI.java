@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.distributedComputingCA.client.Client;
-import com.distributedComputingCA.protocol.Protocol;
+import com.distributedComputingCA.protocol.*;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -81,7 +81,7 @@ public class CreateUserGUI extends JFrame {
                 String pass = new String(pwdPassword.getPassword());
                 String confirm = new String(pwdConfirm.getPassword());
                 if(areFieldsValid(username, pass, confirm)) {
-                    String serverResponse = Client.createUserRequest(Protocol.CREATE_USER, username, pass);
+                    String serverResponse = Client.createUserRequest(ClientProtocol.CREATE_USER, username, pass);
                     createUserResponseGUI(serverResponse);
                 }
 
@@ -128,13 +128,13 @@ public class CreateUserGUI extends JFrame {
     }
 
     private void createUserResponseGUI(String serverResponse) {
-        if(serverResponse.equals("603: " + Protocol.CREATE_USER_FAILURE)) {
+        if(serverResponse.equals("603: " + ServerProtocol.CREATE_USER_FAILURE)) {
             JOptionPane.showMessageDialog(null, "Username already exists in the system please choose another",
                     serverResponse, JOptionPane.ERROR_MESSAGE);
             txtUserName.setText("");
             pwdPassword.setText("");
             pwdConfirm.setText("");
-        }else if(serverResponse.equals("602: " + Protocol.CREATE_USER_SUCCESS)) {
+        }else if(serverResponse.equals("602: " + ServerProtocol.CREATE_USER_SUCCESS)) {
             JOptionPane.showMessageDialog(null, "User: " + txtUserName.getText() + " created",
                     serverResponse, JOptionPane.INFORMATION_MESSAGE);
             txtUserName.setText("");

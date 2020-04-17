@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.distributedComputingCA.client.Client;
-import com.distributedComputingCA.protocol.Protocol;
+import com.distributedComputingCA.protocol.*;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -59,11 +59,11 @@ public class LoginGUI extends JFrame {
                 super.mouseClicked(e);
                 String response;
                 if(txtUserName.getText().length() == 0) {
-                    response = Client.loginRequest(Protocol.LOGIN, " ", new String(pwdPassword.getPassword()));
+                    response = Client.loginRequest(ClientProtocol.LOGIN, " ", new String(pwdPassword.getPassword()));
                 }else if(pwdPassword.getPassword().length == 0) {
-                    response = Client.loginRequest(Protocol.LOGIN, txtUserName.getText(), " ");
+                    response = Client.loginRequest(ClientProtocol.LOGIN, txtUserName.getText(), " ");
                 }else {
-                    response = Client.loginRequest(Protocol.LOGIN, txtUserName.getText(), new String(pwdPassword.getPassword()));
+                    response = Client.loginRequest(ClientProtocol.LOGIN, txtUserName.getText(), new String(pwdPassword.getPassword()));
                 }
                 loginResponseGUI(response);
             }
@@ -100,14 +100,14 @@ public class LoginGUI extends JFrame {
 	}
 	
 	 private void loginResponseGUI(String response) {
-	        if(response.equals("502: " + Protocol.LOGIN_SUCCESS)) {
+	        if(response.equals("502: " + ServerProtocol.LOGIN_SUCCESS)) {
 	            JOptionPane.showMessageDialog(null, "Welcome: " + txtUserName.getText(),
 	                    response, JOptionPane.INFORMATION_MESSAGE);
 	            SelectOptionGUI selectOptionGUI = new SelectOptionGUI();
 	            selectOptionGUI.setTitle(txtUserName.getText());
 	            LoginGUI.super.setVisible(false);
 	            LoginGUI.super.dispose();
-	        }else if(response.equals("503: " + Protocol.LOGIN_SUCCESS)) {
+	        }else if(response.equals("503: " + ServerProtocol.LOGIN_SUCCESS)) {
 	            JOptionPane.showMessageDialog(null, "Invalid Details Entered",
 	                    response, JOptionPane.ERROR_MESSAGE);
 	            txtUserName.setText("");

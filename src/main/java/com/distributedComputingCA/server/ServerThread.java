@@ -1,6 +1,6 @@
 package com.distributedComputingCA.server;
 
-import com.distributedComputingCA.protocol.Protocol;
+import com.distributedComputingCA.protocol.*;
 
 import javax.swing.*;
 import java.io.*;
@@ -64,20 +64,20 @@ public class ServerThread implements Runnable {
         if(!isUserAlreadyLoggedIn(username)) {
             if (credentialsAreValid(username, password)) {
                 try {
-                    myDataSocket.sendResponse("502: " + Protocol.LOGIN_SUCCESS);
+                    myDataSocket.sendResponse("502: " + ServerProtocol.LOGIN_SUCCESS);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    myDataSocket.sendResponse("503: " + Protocol.LOGIN_FAILURE);
+                    myDataSocket.sendResponse("503: " + ServerProtocol.LOGIN_FAILURE);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }else {
             try {
-                myDataSocket.sendResponse("504: " + Protocol.USER_ALREADY_LOGGED_IN);
+                myDataSocket.sendResponse("504: " + ServerProtocol.USER_ALREADY_LOGGED_IN);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -132,7 +132,7 @@ public class ServerThread implements Runnable {
         String password = messageType.get(3);
         if(doesUserNameExist(username)) {
             try {
-                myDataSocket.sendResponse("603: " + Protocol.CREATE_USER_FAILURE);
+                myDataSocket.sendResponse("603: " + ServerProtocol.CREATE_USER_FAILURE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -140,7 +140,7 @@ public class ServerThread implements Runnable {
             appendUserToUsersFile(username, password);
             addUserFileToUserMessagesDirectory(username);
             try {
-                myDataSocket.sendResponse("602: " + Protocol.CREATE_USER_SUCCESS);
+                myDataSocket.sendResponse("602: " + ServerProtocol.CREATE_USER_SUCCESS);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -151,7 +151,7 @@ public class ServerThread implements Runnable {
         File file = new File("UserMessages/" + messageType.get(2) + ".txt");
         if(file.exists()) {
             try {
-                myDataSocket.sendResponse("702: " + Protocol.DOWNLOAD_SUCCESS);
+                myDataSocket.sendResponse("702: " + ServerProtocol.DOWNLOAD_SUCCESS);
                 ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "UserMessages/" + messageType.get(2) + ".txt");
                 try {
                     pb.start();
@@ -163,7 +163,7 @@ public class ServerThread implements Runnable {
             }
         }else {
             try {
-                myDataSocket.sendResponse("703: " + Protocol.DOWNLOAD_FAILURE);
+                myDataSocket.sendResponse("703: " + ServerProtocol.DOWNLOAD_FAILURE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -197,13 +197,13 @@ public class ServerThread implements Runnable {
         if(file.exists()) {
             try {
                 writeMessageToFile(username, message);
-                myDataSocket.sendResponse("802: " + Protocol.UPLOAD_SUCCESS);
+                myDataSocket.sendResponse("802: " + ServerProtocol.UPLOAD_SUCCESS);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else {
             try {
-                myDataSocket.sendResponse("803: " + Protocol.UPLOAD_FAILURE);
+                myDataSocket.sendResponse("803: " + ServerProtocol.UPLOAD_FAILURE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -215,10 +215,10 @@ public class ServerThread implements Runnable {
         Server.loggedInUsers.remove(username);
 
         try {
-            myDataSocket.sendResponse("902: " + Protocol.LOGOFF_SUCCESS);
+            myDataSocket.sendResponse("902: " + ServerProtocol.LOGOFF_SUCCESS);
             myDataSocket.close();
         } catch (IOException e) {
-            myDataSocket.sendResponse("903: " + Protocol.LOGOFF_FAILURE);
+            myDataSocket.sendResponse("903: " + ServerProtocol.LOGOFF_FAILURE);
         }
         isSessionRunning = false;
     }

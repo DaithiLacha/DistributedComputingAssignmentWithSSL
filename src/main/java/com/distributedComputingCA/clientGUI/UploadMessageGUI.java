@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.distributedComputingCA.client.Client;
-import com.distributedComputingCA.protocol.Protocol;
+import com.distributedComputingCA.protocol.*;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -52,7 +52,7 @@ public class UploadMessageGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String serverResponse = Client.uploadMessageRequest(Protocol.UPLOAD,
+                String serverResponse = Client.uploadMessageRequest(ClientProtocol.UPLOAD,
                         UploadMessageGUI.super.getTitle(), txtMessage.getText());
                 uploadGUI(serverResponse);
                 txtMessage.setText("");
@@ -80,7 +80,7 @@ public class UploadMessageGUI extends JFrame {
 	}
 	
 	private void uploadGUI(String response) {
-        if(response.equals("802: " + Protocol.UPLOAD_SUCCESS)) {
+        if(response.equals("802: " + ServerProtocol.UPLOAD_SUCCESS)) {
             JOptionPane.showMessageDialog(null, "Message has been uploaded",
                     response, JOptionPane.INFORMATION_MESSAGE);
         }else {

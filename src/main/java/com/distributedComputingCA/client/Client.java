@@ -1,7 +1,7 @@
 package com.distributedComputingCA.client;
 
 import com.distributedComputingCA.clientGUI.DisplayProtocolsGUI;
-import com.distributedComputingCA.protocol.Protocol;
+import com.distributedComputingCA.protocol.ClientProtocol;
 import java.io.*;
 
 /**
@@ -37,7 +37,7 @@ public class Client {
         }
     }
 
-    public static String createUserRequest(Protocol proto, String username, String password) {
+    public static String createUserRequest(ClientProtocol proto, String username, String password) {
         String clientRequest = "601;" + proto + ";" + username + ";" + password;
         String serverResponse = "";
 
@@ -50,7 +50,7 @@ public class Client {
         return serverResponse;
     }
 
-    public static String loginRequest(Protocol proto, String username, String password) {
+    public static String loginRequest(ClientProtocol proto, String username, String password) {
         String clientRequest = "501;" + proto + ";" + username + ";" + password;
         String serverResponse = "";
 
@@ -63,7 +63,7 @@ public class Client {
         return serverResponse;
     }
 
-    public static String downloadMessagesRequest(Protocol proto, String username) {
+    public static String downloadMessagesRequest(ClientProtocol proto, String username) {
         String clientRequest = "701;" + proto + ";" + username;
         String serverResponse = "";
 
@@ -76,7 +76,7 @@ public class Client {
         return serverResponse;
     }
 
-    public static String uploadMessageRequest(Protocol proto, String username, String message) {
+    public static String uploadMessageRequest(ClientProtocol proto, String username, String message) {
         String clientRequest = "801;" + proto + ";" + username + ";" + message;
         String serverResponse = "";
 
@@ -89,7 +89,7 @@ public class Client {
         return serverResponse;
     }
 
-    public static String logOffRequest(Protocol proto, String username) {
+    public static String logOffRequest(ClientProtocol proto, String username) {
         String clientRequest = "901;" + proto + ";" + username;
         String serverResponse = "";
 
