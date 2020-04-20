@@ -9,8 +9,7 @@ public class ClientDriver {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConnectionGUI connectionGUI = new ConnectionGUI();
-					DisplayProtocolsGUI frame = new DisplayProtocolsGUI();
+					ConnectionGUI connectionGUI = new ConnectionGUI();					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

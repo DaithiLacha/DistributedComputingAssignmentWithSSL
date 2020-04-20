@@ -1,17 +1,14 @@
 package com.distributedComputingCA.clientGUI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import com.distributedComputingCA.client.Client;
 import com.distributedComputingCA.protocol.*;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -59,13 +56,13 @@ public class LoginGUI extends JFrame {
                 super.mouseClicked(e);
                 String response;
                 if(txtUserName.getText().length() == 0) {
-                    response = Client.loginRequest(ClientProtocol.LOGIN, " ", new String(pwdPassword.getPassword()));
+                	JOptionPane.showMessageDialog(null, "Username must be filled", "Error!", JOptionPane.ERROR_MESSAGE);
                 }else if(pwdPassword.getPassword().length == 0) {
-                    response = Client.loginRequest(ClientProtocol.LOGIN, txtUserName.getText(), " ");
+                	JOptionPane.showMessageDialog(null, "Password must be filled", "Error!", JOptionPane.ERROR_MESSAGE);
                 }else {
                     response = Client.loginRequest(ClientProtocol.LOGIN, txtUserName.getText(), new String(pwdPassword.getPassword()));
-                }
-                loginResponseGUI(response);
+                    loginResponseGUI(response);
+                }                
             }
         });
 		btnSubmit.setFont(new Font("Consolas", Font.PLAIN, 18));
@@ -107,7 +104,7 @@ public class LoginGUI extends JFrame {
 	            selectOptionGUI.setTitle(txtUserName.getText());
 	            LoginGUI.super.setVisible(false);
 	            LoginGUI.super.dispose();
-	        }else if(response.equals("503: " + ServerProtocol.LOGIN_SUCCESS)) {
+	        }else if(response.equals("503: " + ServerProtocol.LOGIN_FAILURE)) {
 	            JOptionPane.showMessageDialog(null, "Invalid Details Entered",
 	                    response, JOptionPane.ERROR_MESSAGE);
 	            txtUserName.setText("");

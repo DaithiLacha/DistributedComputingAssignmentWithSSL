@@ -1,5 +1,6 @@
 package com.distributedComputingCA.server;
 
+import com.distributedComputingCA.clientGUI.DisplayProtocolsGUI;
 import com.distributedComputingCA.protocol.*;
 
 import javax.swing.*;
@@ -64,7 +65,7 @@ public class ServerThread implements Runnable {
         if(!isUserAlreadyLoggedIn(username)) {
             if (credentialsAreValid(username, password)) {
                 try {
-                    myDataSocket.sendResponse("502: " + ServerProtocol.LOGIN_SUCCESS);
+                    myDataSocket.sendResponse("502: " + ServerProtocol.LOGIN_SUCCESS);                    
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -160,6 +161,7 @@ public class ServerThread implements Runnable {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                
             }
         }else {
             try {

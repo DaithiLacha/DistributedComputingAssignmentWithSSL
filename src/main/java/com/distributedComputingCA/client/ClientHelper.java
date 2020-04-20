@@ -1,6 +1,9 @@
 package com.distributedComputingCA.client;
 
 import java.net.*;
+
+import com.distributedComputingCA.clientGUI.DisplayProtocolsGUI;
+
 import java.io.*;
 
 /**
@@ -18,6 +21,7 @@ public class ClientHelper {
         int serverPort = Integer.parseInt(portNum);
         mySocket = new ClientStreamSocket(serverHost, serverPort);
         System.out.println("Connection request made");
+        DisplayProtocolsGUI frame = new DisplayProtocolsGUI();
     }
 
     String helperSendRequest(String message) throws IOException {

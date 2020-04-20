@@ -45,11 +45,13 @@ public class DisplayProtocolsGUI extends JFrame {
 		contentPane.add(lblClientTraffic);
 		
 		txtServer = new JTextArea();
+		txtServer.setLineWrap(true);
 		txtServer.setFont(new Font("Consolas", Font.PLAIN, 14));
 		txtServer.setBounds(10, 91, 338, 321);
 		contentPane.add(txtServer);
 		
 		txtClient = new JTextArea();
+		txtClient.setLineWrap(true);
 		txtClient.setFont(new Font("Consolas", Font.PLAIN, 14));
 		txtClient.setBounds(388, 91, 338, 321);
 		contentPane.add(txtClient);

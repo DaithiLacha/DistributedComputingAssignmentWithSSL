@@ -1,13 +1,13 @@
 package com.distributedComputingCA.clientGUI;
 
 import java.awt.EventQueue;
-
+import com.distributedComputingCA.client.Client;
+import com.distributedComputingCA.protocol.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.distributedComputingCA.client.Client;
-import com.distributedComputingCA.protocol.*;
+
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

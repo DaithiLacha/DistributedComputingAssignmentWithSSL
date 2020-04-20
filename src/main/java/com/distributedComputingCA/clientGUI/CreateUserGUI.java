@@ -77,7 +77,7 @@ public class CreateUserGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String username = lblUserName.getText();
+                String username = txtUserName.getText();
                 String pass = new String(pwdPassword.getPassword());
                 String confirm = new String(pwdConfirm.getPassword());
                 if(areFieldsValid(username, pass, confirm)) {
